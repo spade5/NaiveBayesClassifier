@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -13,7 +15,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class PredictDriver {
 
-    public static void main(String[] args) throws NumberFormatException, IOException, ClassNotFoundException, InterruptedException {
+    public static void main(String[] args) throws Exception {
 
         args = new String[] {"/input/test", "/output_class"};
 
@@ -21,6 +23,7 @@ public class PredictDriver {
         Prediction prediction = new Prediction();
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "prediction");
+        FileSystem fs = FileSystem.get(conf);
 
         // 2 获取jar包位置
         job.setJarByClass(Prediction.class);
@@ -41,7 +44,7 @@ public class PredictDriver {
         job.setOutputValueClass(Text.class);
 
         // 7 设置输入和输出文件路径
-        ArrayList<Path> paths = GetPaths(args[0]);
+        ArrayList<Path> paths = GetPaths(fs, new Path(args[0]));
         for(int i=0; i < paths.size(); i++) {
             FileInputFormat.addInputPath(job, paths.get(i));
         }
@@ -52,23 +55,23 @@ public class PredictDriver {
         System.exit(result?0:1);
     }
 
-    private static ArrayList<Path> GetPaths(String path) {
+    private static ArrayList<Path> GetPaths(FileSystem fs, Path path) throws IOException {
         // 获取path路径下所有子文件夹路径
         ArrayList<Path> paths = new ArrayList<Path>();
-        File file = new File(path);
-        // 如果这个路径是文件夹
-        if (file.isDirectory()) {
-            // 获取路径下的所有文件
-            File[] files = file.listFiles();
-            for (int i=0; i<files.length; i++) {
-                // 如果还是文件夹
-                if (files[i].isDirectory()) {
-                    // 将其加入路径列表
-                    paths.add(new Path(files[i].getPath()));
+
+        if (fs.exists(path)) {
+            FileStatus[] fileStatuses = fs.listStatus(path);
+            for (int i = 0; i < fileStatuses.length; i++) {
+                FileStatus fileStatus = fileStatuses[i];
+                Path onePath = fileStatus.getPath();
+                if (fileStatus.isDirectory()) {
+                    paths.addAll(GetPaths(fs, onePath));
+                } else if (onePath.getName().contains(".txt")) {
+                    paths.add(onePath);
                 }
-                else {continue;}
             }
         }
+
         return paths;
     }
 }
