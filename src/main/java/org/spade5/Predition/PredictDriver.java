@@ -15,7 +15,7 @@ public class PredictDriver {
 
     public static void main(String[] args) throws NumberFormatException, IOException, ClassNotFoundException, InterruptedException {
 
-        args = new String[] {"e:/INPUT/TEST", "e:/z_output_class"};
+        args = new String[] {"/input/test", "/output_class"};
 
         // 1 获取job信息
         Prediction prediction = new Prediction();
