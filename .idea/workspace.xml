@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="docCount, wordCount done.">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierPredict_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/WordCount/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierDocCount_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Predict_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierPredict_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/DocCount_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierWordCount_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/WordCount_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,18 +58,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/ch/IdeaProjects/BayesClassifier/src/main/java/org/spade5&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/hao/IdeaProjects/NaiveBayesClassifier/src/main/java/org/spade5/Predition",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.26091954",
+    "settings.editor.selected.configurable": "MavenSettings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/org/spade5" />

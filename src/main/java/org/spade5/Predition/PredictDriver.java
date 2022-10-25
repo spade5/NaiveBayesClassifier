@@ -20,7 +20,7 @@ public class PredictDriver {
         args = new String[] {"/input/test", "/output_class"};
 
         // 1 获取job信息
-        Prediction prediction = new Prediction();
+
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "prediction");
         FileSystem fs = FileSystem.get(conf);

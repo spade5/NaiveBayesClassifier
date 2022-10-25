@@ -10,6 +10,10 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 public class PredictMapper extends Mapper<NullWritable, Text, Text, Text>{
     Text k = new Text();
+    Prediction prediction = new Prediction();
+    public PredictMapper() throws Exception {
+    }
+
     @Override
     protected void setup(Mapper<NullWritable, Text, Text, Text>.Context context)
             throws IOException, InterruptedException {
@@ -24,9 +28,14 @@ public class PredictMapper extends Mapper<NullWritable, Text, Text, Text>{
     protected void map(NullWritable key, Text value, Context context)
             throws IOException, InterruptedException {
         Text result = new Text();
-        String[] CLASS_NAMES = {"CHINA","CANA"};
+        String[] CLASS_NAMES = prediction.getNames();
         for(String classname:CLASS_NAMES) {
-            result.set(classname+"&"+Double.toString(Prediction.conditionalProbabilityForClass(value.toString(),classname)));
+            try {
+                result.set(classname+"&"+Double.toString(prediction.conditionalProbabilityForClass(value.toString(),classname)));
+            } catch (Exception e) {
+                Utils.outInfo("error:" + classname + ":" + e.getMessage());
+                throw new RuntimeException(e);
+            }
             context.write(k,result);
         }
     }
