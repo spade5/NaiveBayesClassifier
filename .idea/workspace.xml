@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="docCount, wordCount done.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/WordCount/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierDocCount_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Predict_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierPredict_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/DocCount_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierWordCount_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/WordCount_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" afterDir="false" />
-    </list>
+    <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="add jar" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,7 +79,21 @@
       <option name="project" value="LOCAL" />
       <updated>1665299317907</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="prediction 调通">
+      <created>1666681930812</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666681930812</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add jar">
+      <created>1666681991860</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666681991860</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -107,6 +109,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="docCount, wordCount done." />
-    <option name="LAST_COMMIT_MESSAGE" value="docCount, wordCount done." />
+    <MESSAGE value="prediction 调通" />
+    <MESSAGE value="add jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="add jar" />
   </component>
 </project>
