@@ -1,0 +1,152 @@
+Index: src/main/java/org/spade5/Predition/PredictDriver.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.spade5.Predition;\n\nimport java.io.File;\nimport java.io.IOException;\nimport java.util.ArrayList;\n\nimport org.apache.hadoop.conf.Configuration;\nimport org.apache.hadoop.fs.Path;\nimport org.apache.hadoop.io.Text;\nimport org.apache.hadoop.mapreduce.Job;\nimport org.apache.hadoop.mapreduce.lib.input.FileInputFormat;\nimport org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;\n\npublic class PredictDriver {\n\n    public static void main(String[] args) throws NumberFormatException, IOException, ClassNotFoundException, InterruptedException {\n\n        args = new String[] {\"e:/INPUT/TEST\", \"e:/z_output_class\"};\n\n        // 1 获取job信息\n        Prediction prediction = new Prediction();\n        Configuration conf = new Configuration();\n        Job job = Job.getInstance(conf, \"prediction\");\n\n        // 2 获取jar包位置\n        job.setJarByClass(Prediction.class);\n\n        // 3 关联自定义的mapper和reducer\n        job.setMapperClass(PredictMapper.class);\n        job.setReducerClass(PredictReducer.class);\n\n        // 4 设置自定义的InputFormat类\n        job.setInputFormatClass(PredictTestInputFormat.class);\n\n        // 5 设置map输出数据类型\n        job.setMapOutputKeyClass(Text.class);\n        job.setMapOutputValueClass(Text.class);\n\n        // 6 设置最终输出数据类型\n        job.setOutputKeyClass(Text.class);\n        job.setOutputValueClass(Text.class);\n\n        // 7 设置输入和输出文件路径\n        ArrayList<Path> paths = GetPaths(args[0]);\n        for(int i=0; i < paths.size(); i++) {\n            FileInputFormat.addInputPath(job, paths.get(i));\n        }\n        FileOutputFormat.setOutputPath(job, new Path(args[1]));\n\n        // 8 提交代码\n        boolean result = job.waitForCompletion(true);\n        System.exit(result?0:1);\n    }\n\n    private static ArrayList<Path> GetPaths(String path) {\n        // 获取path路径下所有子文件夹路径\n        ArrayList<Path> paths = new ArrayList<Path>();\n        File file = new File(path);\n        // 如果这个路径是文件夹\n        if (file.isDirectory()) {\n            // 获取路径下的所有文件\n            File[] files = file.listFiles();\n            for (int i=0; i<files.length; i++) {\n                // 如果还是文件夹\n                if (files[i].isDirectory()) {\n                    // 将其加入路径列表\n                    paths.add(new Path(files[i].getPath()));\n                }\n                else {continue;}\n            }\n        }\n        return paths;\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/spade5/Predition/PredictDriver.java b/src/main/java/org/spade5/Predition/PredictDriver.java
+--- a/src/main/java/org/spade5/Predition/PredictDriver.java	(revision 79297c378081477b607effe83804ffa0458fafc9)
++++ b/src/main/java/org/spade5/Predition/PredictDriver.java	(date 1665299684157)
+@@ -5,6 +5,8 @@
+ import java.util.ArrayList;
+ 
+ import org.apache.hadoop.conf.Configuration;
++import org.apache.hadoop.fs.FileStatus;
++import org.apache.hadoop.fs.FileSystem;
+ import org.apache.hadoop.fs.Path;
+ import org.apache.hadoop.io.Text;
+ import org.apache.hadoop.mapreduce.Job;
+@@ -15,12 +17,13 @@
+ 
+     public static void main(String[] args) throws NumberFormatException, IOException, ClassNotFoundException, InterruptedException {
+ 
+-        args = new String[] {"e:/INPUT/TEST", "e:/z_output_class"};
++        args = new String[] {"/input/test", "/output_class"};
+ 
+         // 1 获取job信息
+         Prediction prediction = new Prediction();
+         Configuration conf = new Configuration();
+         Job job = Job.getInstance(conf, "prediction");
++        FileSystem fs = FileSystem.get(conf);
+ 
+         // 2 获取jar包位置
+         job.setJarByClass(Prediction.class);
+@@ -41,7 +44,7 @@
+         job.setOutputValueClass(Text.class);
+ 
+         // 7 设置输入和输出文件路径
+-        ArrayList<Path> paths = GetPaths(args[0]);
++        ArrayList<Path> paths = GetPaths(fs, new Path(args[0]));
+         for(int i=0; i < paths.size(); i++) {
+             FileInputFormat.addInputPath(job, paths.get(i));
+         }
+@@ -52,23 +55,23 @@
+         System.exit(result?0:1);
+     }
+ 
+-    private static ArrayList<Path> GetPaths(String path) {
++    private static ArrayList<Path> GetPaths(FileSystem fs, Path path) throws IOException {
+         // 获取path路径下所有子文件夹路径
+         ArrayList<Path> paths = new ArrayList<Path>();
+-        File file = new File(path);
+-        // 如果这个路径是文件夹
+-        if (file.isDirectory()) {
+-            // 获取路径下的所有文件
+-            File[] files = file.listFiles();
+-            for (int i=0; i<files.length; i++) {
+-                // 如果还是文件夹
+-                if (files[i].isDirectory()) {
+-                    // 将其加入路径列表
+-                    paths.add(new Path(files[i].getPath()));
++
++        if (fs.exists(path)) {
++            FileStatus[] fileStatuses = fs.listStatus(path);
++            for (int i = 0; i < fileStatuses.length; i++) {
++                FileStatus fileStatus = fileStatuses[i];
++                Path onePath = fileStatus.getPath();
++                if (fileStatus.isDirectory()) {
++                    paths.addAll(GetPaths(fs, onePath));
++                } else if (onePath.getName().contains(".txt")) {
++                    paths.add(onePath);
+                 }
+-                else {continue;}
+             }
+         }
++
+         return paths;
+     }
+ }
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"ddde97a3-2f3b-42a9-84bc-e5dec1249140\" name=\"Changes\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.gitignore\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/artifacts/BayesClassifierDocCount_jar.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/artifacts/BayesClassifierWordCount_jar.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/codeStyles/Project.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/encodings.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/pom.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountDriver.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountMapper.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountReducer.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/DocCount/WholeFileInputFormat.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/DocCount/WholeRecordReader.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictDriver.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictReducer.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictTestInputFormat.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictTestRecordReader.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/WordCount/TextPair.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/WordCount/WordCountDriver.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/WordCount/WordCountMapper.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/spade5/WordCount/WordCountReducer.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"CodeStyleSettingsInfer\">\n    <option name=\"done\" value=\"true\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"MavenImportPreferences\">\n    <option name=\"generalSettings\">\n      <MavenGeneralSettings>\n        <option name=\"localRepository\" value=\"$USER_HOME$/workspace/apache-maven-3.8.6/repository\" />\n        <option name=\"mavenHome\" value=\"$USER_HOME$/workspace/apache-maven-3.8.6\" />\n        <option name=\"userSettingsFile\" value=\"$USER_HOME$/workspace/apache-maven-3.8.6/conf/settings.xml\" />\n      </MavenGeneralSettings>\n    </option>\n  </component>\n  <component name=\"ProjectCodeStyleSettingsMigration\">\n    <option name=\"version\" value=\"2\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2Fsor0sjUHYAqvUkMb2E21L9T0Y\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"last_opened_file_path\": \"/Users/ch/IdeaProjects/BayesClassifier/src/main/java/org/spade5\",\n    \"project.structure.last.edited\": \"Artifacts\",\n    \"project.structure.proportion\": \"0.15\",\n    \"project.structure.side.proportion\": \"0.2\",\n    \"settings.editor.selected.configurable\": \"MavenSettings\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/main/java/org/spade5\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"ddde97a3-2f3b-42a9-84bc-e5dec1249140\" name=\"Changes\" comment=\"\" />\n      <created>1665290350892</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1665290350892</updated>\n    </task>\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 79297c378081477b607effe83804ffa0458fafc9)
++++ b/.idea/workspace.xml	(date 1665299649168)
+@@ -4,33 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierDocCount_jar.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/BayesClassifierWordCount_jar.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountDriver.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountMapper.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountReducer.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/WholeFileInputFormat.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/WholeRecordReader.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictDriver.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictReducer.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictTestInputFormat.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictTestRecordReader.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/WordCount/TextPair.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/WordCount/WordCountDriver.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/WordCount/WordCountMapper.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/WordCount/WordCountReducer.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
++    <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="docCount, wordCount done.">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictDriver.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -99,6 +75,14 @@
+       <option name="presentableId" value="Default" />
+       <updated>1665290350892</updated>
+     </task>
++    <task id="LOCAL-00001" summary="docCount, wordCount done.">
++      <created>1665299317907</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1665299317907</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -112,4 +96,8 @@
+       </map>
+     </option>
+   </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="docCount, wordCount done." />
++    <option name="LAST_COMMIT_MESSAGE" value="docCount, wordCount done." />
++  </component>
+ </project>
+\ No newline at end of file
