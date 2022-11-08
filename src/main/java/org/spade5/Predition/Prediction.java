@@ -1,7 +1,6 @@
 package org.spade5.Predition;
 
 import java.io.*;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -9,7 +8,6 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import java.util.logging.Logger;
-import org.spade5.Predition.Utils;
 
 public class Prediction {
 
@@ -17,8 +15,9 @@ public class Prediction {
     private static Hashtable<Map<String,String>,Double> class_term_prob = new Hashtable<Map<String, String>, Double>();
     private static Hashtable<String,Double> class_term_total = new Hashtable<String, Double>();
     private static Hashtable<String,Double> class_term_num = new Hashtable<String, Double>();
+    private static String DocPathStr = "/output_doc/part-r-00000";
+    private static String WordPathStr = "/output_word/part-r-00000";
 
-    public static final String HDFS_ROOT_URL="hdfs://hadoop0:9000";
     private Configuration conf;
     private static final Logger log = Logger.getLogger(Prediction.class.getName());
     Prediction() throws Exception {
@@ -27,7 +26,7 @@ public class Prediction {
         Utils.outInfo("Prediction initializing...");
 
         // 统计文档总数
-        BufferedReader reader = readFile(HDFS_ROOT_URL+ "/output_doc/" + "part-r-00000");
+        BufferedReader reader = readFile(DocPathStr);
         double file_total = 0;
         while(reader.ready()){
             String line = reader.readLine();
@@ -35,7 +34,7 @@ public class Prediction {
             file_total += Double.valueOf(args[1]);
         }
         // 计算先验概率class_prob
-        reader = readFile(HDFS_ROOT_URL+ "/output_doc/" + "part-r-00000");
+        reader = readFile(DocPathStr);
         while(reader.ready()){
             String line = reader.readLine();
             String[] args = line.split("\t");
@@ -44,7 +43,7 @@ public class Prediction {
         }
 
         //计算单词总数
-        reader = readFile(HDFS_ROOT_URL+ "/output_word/" + "part-r-00000");
+        reader = readFile(WordPathStr);
         while(reader.ready()){
             String line = reader.readLine();
             String[] args = line.split("\t");// 0：类，1：词条，2：词频
@@ -53,7 +52,7 @@ public class Prediction {
             class_term_total.put(classname,class_term_total.getOrDefault(classname,0.0)+count);
         }
         //计算单词集合大小
-        reader = readFile(HDFS_ROOT_URL+ "/output_word/" + "part-r-00000");
+        reader = readFile(WordPathStr);
         while(reader.ready()){
             String line = reader.readLine();
             String[] args = line.split("\t");// 0：类，1：词条，2：词频
@@ -61,7 +60,7 @@ public class Prediction {
             class_term_num.put(classname,class_term_num.getOrDefault(classname,0.0)+1.0);
         }
         //计算每个类别里面出现的词条概率class-term prob
-        reader = readFile(HDFS_ROOT_URL+ "/output_word/" + "part-r-00000");
+        reader = readFile(WordPathStr);
         while(reader.ready()){
             String line = reader.readLine();
             String[] args = line.split("\t");// 0：类，1：词条，2：词频
@@ -101,7 +100,7 @@ public class Prediction {
     }
 
     private BufferedReader readFile(String uri) throws IOException {
-        FileSystem fs = FileSystem.get(URI.create(uri), conf);
+        FileSystem fs = FileSystem.get(conf);
         BufferedReader reader = new BufferedReader(new InputStreamReader(fs.open(new Path(uri))));
         return reader;
     }

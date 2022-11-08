@@ -1,6 +1,5 @@
 package org.spade5.DocCount;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,9 +15,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class DocCountDriver {
 
-    public static void main(String[] args) throws IllegalArgumentException, IOException, ClassNotFoundException, InterruptedException {
-
-        args = new String[] {"/input/train", "/output_doc"};
+    public static void main(String[] _args) throws IllegalArgumentException, IOException, ClassNotFoundException, InterruptedException {
+        String[] args;
+        if (_args == null || _args.length == 0) {
+            args = new String[] {"/input/train", "/output_doc"};
+        } else {
+            args = _args;
+        }
 
         // 1 获取job信息
         Configuration conf = new Configuration();

@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="evaluation">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Evaluation_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Evaluation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="evaluation.jar">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Test_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/test/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/test/TestHDFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_24__20_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_24__20_01__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_26__21_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_26__21_04__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/DocCount_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DocCount_jar/BayesClassifier.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Evaluation_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Evaluation_jar/BayesClassifier.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Predict_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Predict_jar/BayesClassifier.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/WordCount_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/WordCount_jar/BayesClassifier.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +64,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/hao/IdeaProjects/NaiveBayesClassifier/src/main/java/org/spade5",
+    "last_opened_file_path": "C:/Users/hao/IdeaProjects/NaiveBayesClassifier/src/main/java/org/spade5/test",
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.26091954",
@@ -105,7 +113,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666682174162</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="evaluation">
+      <created>1666683462184</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666683462184</updated>
+    </task>
+    <task id="LOCAL-00006" summary="evaluation.jar">
+      <created>1666683498896</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666683498896</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,6 +146,7 @@
     <MESSAGE value="prediction 调通" />
     <MESSAGE value="add jar" />
     <MESSAGE value="evaluation" />
-    <option name="LAST_COMMIT_MESSAGE" value="evaluation" />
+    <MESSAGE value="evaluation.jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="evaluation.jar" />
   </component>
 </project>
