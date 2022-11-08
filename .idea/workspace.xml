@@ -6,14 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="update prediction">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DocCount_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DocCount_jar/BayesClassifier.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Evaluation_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Evaluation_jar/BayesClassifier.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Predict_jar/BayesClassifier.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/WordCount_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/WordCount_jar/BayesClassifier.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/test/TestHDFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/test/TestHDFS.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667896508774</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="update prediction">
+      <created>1667898983546</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667898983546</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
