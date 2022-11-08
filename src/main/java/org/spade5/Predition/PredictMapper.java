@@ -33,7 +33,7 @@ public class PredictMapper extends Mapper<NullWritable, Text, Text, Text>{
             try {
                 result.set(classname+"&"+Double.toString(prediction.conditionalProbabilityForClass(value.toString(),classname)));
             } catch (Exception e) {
-                Utils.outInfo("error:" + classname + ":" + e.getMessage());
+//                Utils.outInfo("error:" + classname + ":" + e.getMessage());
                 throw new RuntimeException(e);
             }
             context.write(k,result);

@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="evaluation.jar">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Test_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/test/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/spade5/test/TestHDFS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_24__20_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_24__20_01__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_26__21_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_26__21_04__Changes_.xml" afterDir="false" />
+    <list default="true" id="ddde97a3-2f3b-42a9-84bc-e5dec1249140" name="Changes" comment="update prediction">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DocCount_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DocCount_jar/BayesClassifier.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Evaluation_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Evaluation_jar/BayesClassifier.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Predict_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Predict_jar/BayesClassifier.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Predict_jar/BayesClassifier.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/WordCount_jar/BayesClassifier.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/WordCount_jar/BayesClassifier.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/DocCount/DocCountDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/PredictMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/Predition/Prediction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/spade5/test/TestHDFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/spade5/test/TestHDFS.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666683498896</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update prediction">
+      <created>1667896508774</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667896508774</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,6 +151,7 @@
     <MESSAGE value="add jar" />
     <MESSAGE value="evaluation" />
     <MESSAGE value="evaluation.jar" />
-    <option name="LAST_COMMIT_MESSAGE" value="evaluation.jar" />
+    <MESSAGE value="update prediction" />
+    <option name="LAST_COMMIT_MESSAGE" value="update prediction" />
   </component>
 </project>

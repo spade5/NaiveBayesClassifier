@@ -14,36 +14,25 @@ import java.util.List;
 
 public class TestHDFS {
     public static void main(String[] args) throws Exception {
+        readFile("/output_doc/part-r-00000");
+        readFile("/output_word/part-r-00000");
+    }
+
+    public static void readFile(String path) throws IOException {
         Configuration conf = new Configuration();
-
         FileSystem fs = FileSystem.get(conf);
-        List paths = getFilesUnderFolder(fs, new Path("/"), null);
-
-        FSDataInputStream fsin= fs.open(new Path("/output_doc/part-r-00000"));
-
+        FSDataInputStream fsin= fs.open(new Path(path));
         BufferedReader br =null;
-
         String line ;
-
         try{
-            System.out.println("start print output_doc");
+            System.out.println("start print " + path);
             br = new BufferedReader(new InputStreamReader(fsin));
-
             while ((line = br.readLine()) != null) {
-
                 System.out.println(line);
-
             }
-            System.out.println("end print output_doc");
-        }finally{
-
+            System.out.println("end print " + path);
+        }finally {
             br.close();
-
-        }
-
-        System.out.println("");
-        for (int i = 0; i < paths.size(); i++) {
-            System.out.println(paths.get(i));
         }
     }
 

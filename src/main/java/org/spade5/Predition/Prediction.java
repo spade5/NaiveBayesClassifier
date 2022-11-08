@@ -7,7 +7,6 @@ import java.util.Map;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import java.util.logging.Logger;
 
 public class Prediction {
 
@@ -19,11 +18,10 @@ public class Prediction {
     private static String WordPathStr = "/output_word/part-r-00000";
 
     private Configuration conf;
-    private static final Logger log = Logger.getLogger(Prediction.class.getName());
     Prediction() throws Exception {
         // 统计文档总数
         conf = new Configuration();
-        Utils.outInfo("Prediction initializing...");
+//        Utils.outInfo("Prediction initializing...");
 
         // 统计文档总数
         BufferedReader reader = readFile(DocPathStr);
@@ -72,10 +70,9 @@ public class Prediction {
             class_term_prob.put(map, (count+1)/(class_term_total.get(classname)+class_term_num.get(classname)));
         }
 
-        Utils.outInfo(class_prob.toString());
-        Utils.outInfo(class_term_total.toString());
-        Utils.outInfo(class_term_num.toString());
-//        System.out.println(class_term_prob);
+//        Utils.outInfo(class_prob.toString());
+//        Utils.outInfo(class_term_total.toString());
+//        Utils.outInfo(class_term_num.toString());
     }
 
     public String[] getNames() {
@@ -84,8 +81,8 @@ public class Prediction {
     public double conditionalProbabilityForClass(String content, String classname) throws Exception{
         // 计算一个文档属于某类的条件概率
         double result = 0;
-        Utils.outInfo("class_term_total:" + class_term_total);
-        Utils.outInfo("calc " + classname + ":" + class_term_total.get(classname));
+//        Utils.outInfo("class_term_total:" + class_term_total);
+//        Utils.outInfo("calc " + classname + ":" + class_term_total.get(classname));
         String[] words = content.split("\n");
         for(String word:words){
             Map<String,String> map = new HashMap<String, String>();
